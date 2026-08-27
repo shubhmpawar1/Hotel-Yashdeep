@@ -66,9 +66,15 @@
     }
 
     .hero-slide[data-slide="1"] {
+      /* Source photo is only 720px wide (a phone shot) — full-width cover would upscale/zoom
+         it too far, so show it un-cropped as a right-aligned panel over a dark fill instead. */
+      background-color: #14100d;
       background-image:
-        linear-gradient(120deg, rgba(15, 12, 8, 0.6), rgba(15, 12, 8, 0.15) 55%, rgba(15, 12, 8, 0.6)),
-        linear-gradient(210deg, #d9b06a 0%, #aa8453 30%, #6b5240 58%, #2c241f 82%, #14100d 100%);
+        linear-gradient(120deg, rgba(15, 12, 8, 0.35), rgba(15, 12, 8, 0.1) 55%, rgba(15, 12, 8, 0.75) 75%),
+        url('images/about/hotel-exterior-day.jpg');
+      background-size: cover, auto 100%;
+      background-position: center, right center;
+      background-repeat: no-repeat, no-repeat;
     }
 
     .hero-slide[data-slide="2"] {
