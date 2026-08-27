@@ -168,6 +168,81 @@
     border-color: rgba(170, 132, 83, 0.6);
     box-shadow: 0 10px 30px -15px rgba(170, 132, 83, 0.35);
   }
+
+  /* Testimonials — placeholder lounge/interior tones, swap with a real hotel photo later */
+  .testimonial-bg {
+    background-image:
+      linear-gradient(100deg, rgba(8,9,8,0.85) 0%, rgba(8,9,8,0.45) 42%, rgba(8,9,8,0.2) 65%, rgba(8,9,8,0.55) 100%),
+      linear-gradient(160deg, #3d4c40 0%, #2c3a30 28%, #212c24 52%, #171f19 76%, #0c0f0d 100%);
+  }
+  .testimonial-slide {
+    display: none;
+  }
+  .testimonial-slide.is-active {
+    display: block;
+    animation: roomFadeIn 0.6s ease;
+  }
+  .avatar-placeholder {
+    height: 56px;
+    width: 56px;
+    border-radius: 9999px;
+    background-color: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .testimonial-dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .testimonial-dot.is-active {
+    background-color: rgb(170, 132, 83);
+    border-color: rgb(170, 132, 83);
+  }
+
+  /* Nearby Attractions — placeholder scenic tones, swap with real location photos later */
+  .attraction-photo-temple {
+    background-image:
+      linear-gradient(10deg, rgba(20,14,8,0.1), rgba(20,14,8,0.1)),
+      linear-gradient(200deg, #f4cf94 0%, #e2a15c 28%, #b97a55 56%, #6b4a42 80%, #241a17 100%);
+  }
+  .attraction-photo-transport {
+    background-image:
+      linear-gradient(10deg, rgba(10,14,20,0.1), rgba(10,14,20,0.1)),
+      linear-gradient(200deg, #cfe6ef 0%, #a8cfdd 24%, #7fa2ba 48%, #5c6f8a 72%, #2b3142 100%);
+  }
+  .attraction-photo-airport {
+    background-image:
+      linear-gradient(10deg, rgba(20,16,10,0.1), rgba(20,16,10,0.1)),
+      linear-gradient(200deg, #f6dcae 0%, #e3b57f 26%, #a8899a 54%, #56567e 78%, #232337 100%);
+  }
+
+  /* Room gallery strip — placeholder interior tones, swap with real room photos later */
+  .room-gallery-photo-1 { background-image: linear-gradient(165deg, #e9e2d6 0%, #cdbfa4 45%, #8f7a5f 80%, #4a3c30 100%); }
+  .room-gallery-photo-2 { background-image: linear-gradient(165deg, #dfe1e4 0%, #b9c0c6 40%, #5c6672 75%, #262b31 100%); }
+  .room-gallery-photo-3 { background-image: linear-gradient(165deg, #e7ded2 0%, #c7b9a1 42%, #7d6b56 78%, #362d24 100%); }
+  .room-gallery-photo-4 { background-image: linear-gradient(165deg, #e3e6df 0%, #b7c2b0 42%, #5f6e58 78%, #262e22 100%); }
+
+  .room-gallery-info {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .room-gallery-card:hover .room-gallery-info {
+    opacity: 1;
+  }
+  .room-gallery-label {
+    transition: opacity 0.3s ease;
+  }
+  .room-gallery-card:hover .room-gallery-label {
+    opacity: 0;
+  }
 </style>
 </head>
 <body class="bg-[#0a0908]">
@@ -577,15 +652,388 @@
     </div>
   </section>
   <!-- ================= END FACILITIES =================== -->
-    <section id="contact" class="min-h-[40vh] flex items-center justify-center text-white/40 font-nav text-sm tracking-widest">
-      CONTACT SECTION — COMING NEXT
-    </section>
-  </main>
 
-  <!-- Placeholder footer -->
-  <footer class="bg-[#0a0908] border-t border-white/10 py-10 text-center text-white/40 font-nav text-xs tracking-widest">
-    FOOTER — COMING NEXT
+  <!-- ================ NEARBY ATTRACTIONS ================= -->
+  <section id="attractions" class="bg-white py-24 px-6 sm:px-10">
+    <div class="max-w-[1600px] mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="font-nav text-xs tracking-[0.4em] text-gold mb-3">EXPLORE</p>
+        <h2 class="font-display text-[46px] font-normal text-[#222] leading-[1.25em]">
+          Nearby Attractions
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Vaijnath Jyotirlinga Temple -->
+        <div class="relative aspect-[3/4] rounded-md overflow-hidden shadow-xl attraction-photo-temple">
+          <div class="absolute left-4 right-4 bottom-4 flex flex-col items-start gap-2">
+            <div class="flex flex-wrap items-stretch">
+              <span class="bg-gold/90 text-white font-nav text-[11px] tracking-[0.15em] uppercase px-3 py-2 flex items-center">TEMPLE</span>
+              <span class="bg-black/35 backdrop-blur-sm text-white font-display text-xl px-4 py-1.5 flex items-center">Vaijnath Temple</span>
+            </div>
+            <span class="inline-flex items-center gap-2 bg-black/45 backdrop-blur-sm text-white font-nav text-[11px] tracking-[0.1em] px-3 py-2">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5.5 9 4l6 2 5-1.5v14L15 20l-6-2-5 1.5v-14ZM9 4v14M15 6v14"/></svg>
+              0.5 KM FROM HOTEL
+            </span>
+          </div>
+        </div>
+
+        <!-- Parli Vaijnath Railway Station -->
+        <div class="relative aspect-[3/4] rounded-md overflow-hidden shadow-xl attraction-photo-transport">
+          <div class="absolute left-4 right-4 bottom-4 flex flex-col items-start gap-2">
+            <div class="flex flex-wrap items-stretch">
+              <span class="bg-gold/90 text-white font-nav text-[11px] tracking-[0.15em] uppercase px-3 py-2 flex items-center">RAILWAY</span>
+              <span class="bg-black/35 backdrop-blur-sm text-white font-display text-xl px-4 py-1.5 flex items-center">Parli Vaijnath Station</span>
+            </div>
+            <span class="inline-flex items-center gap-2 bg-black/45 backdrop-blur-sm text-white font-nav text-[11px] tracking-[0.1em] px-3 py-2">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5.5 9 4l6 2 5-1.5v14L15 20l-6-2-5 1.5v-14ZM9 4v14M15 6v14"/></svg>
+              1.8 KM FROM HOTEL
+            </span>
+          </div>
+        </div>
+
+        <!-- Nearest Airport -->
+        <div class="relative aspect-[3/4] rounded-md overflow-hidden shadow-xl attraction-photo-airport">
+          <div class="absolute left-4 right-4 bottom-4 flex flex-col items-start gap-2">
+            <div class="flex flex-wrap items-stretch">
+              <span class="bg-gold/90 text-white font-nav text-[11px] tracking-[0.15em] uppercase px-3 py-2 flex items-center">AIRPORT</span>
+              <span class="bg-black/35 backdrop-blur-sm text-white font-display text-xl px-4 py-1.5 flex items-center">Latur Airport</span>
+            </div>
+            <span class="inline-flex items-center gap-2 bg-black/45 backdrop-blur-sm text-white font-nav text-[11px] tracking-[0.1em] px-3 py-2">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5.5 9 4l6 2 5-1.5v14L15 20l-6-2-5 1.5v-14ZM9 4v14M15 6v14"/></svg>
+              65 KM FROM HOTEL
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ============== END NEARBY ATTRACTIONS ================ -->
+
+  <!-- =================== ROOM GALLERY ==================== -->
+  <section id="room-gallery" class="grid grid-cols-2 lg:grid-cols-4">
+
+    <!-- Deluxe Room -->
+    <div class="room-gallery-card group relative overflow-hidden h-[320px] sm:h-[560px] room-gallery-photo-1">
+      <div class="room-gallery-label absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent flex items-end p-5">
+        <h3 class="font-serif text-2xl text-white">Deluxe Room</h3>
+      </div>
+      <div class="room-gallery-info absolute inset-0 bg-black/35 flex flex-col justify-start gap-2 p-4 pt-6 overflow-y-auto">
+        <h3 class="bg-black/45 backdrop-blur-sm font-display text-2xl text-white px-4 py-2 w-fit">Deluxe Room</h3>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 w-fit">1 Double Bed – 2 Guests</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Size:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">136 sq feet</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Amenities:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">AC, TV, WiFi, Bathroom</span>
+        </div>
+        <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2 w-fit">Features:</span>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 leading-relaxed">
+          Air-Conditioned, Private Bath, Complimentary Toiletries
+        </p>
+        <a href="#rooms" class="bg-black/45 backdrop-blur-sm font-nav text-xs tracking-[0.25em] text-white border-b border-white/60 px-4 py-2 w-fit hover:text-gold hover:border-gold transition-colors">
+          VIEW DETAILS
+        </a>
+      </div>
+    </div>
+
+    <!-- Family Suite -->
+    <div class="room-gallery-card group relative overflow-hidden h-[320px] sm:h-[560px] room-gallery-photo-2">
+      <div class="room-gallery-label absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent flex items-end p-5">
+        <h3 class="font-serif text-2xl text-white">Family Suite</h3>
+      </div>
+      <div class="room-gallery-info absolute inset-0 bg-black/35 flex flex-col justify-start gap-2 p-4 pt-6 overflow-y-auto">
+        <h3 class="bg-black/45 backdrop-blur-sm font-display text-2xl text-white px-4 py-2 w-fit">Family Suite</h3>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 w-fit">1 Double Bed + Sofa – 3 Guests</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Size:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">210 sq feet</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Amenities:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">AC, Smart TV, WiFi, Bathroom</span>
+        </div>
+        <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2 w-fit">Features:</span>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 leading-relaxed">
+          Separate Seating Area, Private Bath, Complimentary Toiletries
+        </p>
+        <a href="#rooms" class="bg-black/45 backdrop-blur-sm font-nav text-xs tracking-[0.25em] text-white border-b border-white/60 px-4 py-2 w-fit hover:text-gold hover:border-gold transition-colors">
+          VIEW DETAILS
+        </a>
+      </div>
+    </div>
+
+    <!-- Family Room -->
+    <div class="room-gallery-card group relative overflow-hidden h-[320px] sm:h-[560px] room-gallery-photo-3">
+      <div class="room-gallery-label absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent flex items-end p-5">
+        <h3 class="font-serif text-2xl text-white">Family Room</h3>
+      </div>
+      <div class="room-gallery-info absolute inset-0 bg-black/35 flex flex-col justify-start gap-2 p-4 pt-6 overflow-y-auto">
+        <h3 class="bg-black/45 backdrop-blur-sm font-display text-2xl text-white px-4 py-2 w-fit">Family Room</h3>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 w-fit">2 Double Beds – 4 Guests</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Size:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">240 sq feet</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Amenities:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">AC, TV, WiFi, Bathroom</span>
+        </div>
+        <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2 w-fit">Features:</span>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 leading-relaxed">
+          Air-Conditioned, Private Bath, Complimentary Toiletries
+        </p>
+        <a href="#rooms" class="bg-black/45 backdrop-blur-sm font-nav text-xs tracking-[0.25em] text-white border-b border-white/60 px-4 py-2 w-fit hover:text-gold hover:border-gold transition-colors">
+          VIEW DETAILS
+        </a>
+      </div>
+    </div>
+
+    <!-- Triple Room -->
+    <div class="room-gallery-card group relative overflow-hidden h-[320px] sm:h-[560px] room-gallery-photo-4">
+      <div class="room-gallery-label absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent flex items-end p-5">
+        <h3 class="font-serif text-2xl text-white">Triple Room</h3>
+      </div>
+      <div class="room-gallery-info absolute inset-0 bg-black/35 flex flex-col justify-start gap-2 p-4 pt-6 overflow-y-auto">
+        <h3 class="bg-black/45 backdrop-blur-sm font-display text-2xl text-white px-4 py-2 w-fit">Triple Room</h3>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 w-fit">3 Single Beds – 3 Guests</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Size:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">180 sq feet</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2">Amenities:</span>
+          <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2">AC, TV, WiFi, Bathroom</span>
+        </div>
+        <span class="bg-black/45 backdrop-blur-sm font-body text-sm text-white/80 px-4 py-2 w-fit">Features:</span>
+        <p class="bg-black/45 backdrop-blur-sm font-body text-sm text-white px-4 py-2 leading-relaxed">
+          Air-Conditioned, Private Bath, Complimentary Toiletries
+        </p>
+        <a href="#rooms" class="bg-black/45 backdrop-blur-sm font-nav text-xs tracking-[0.25em] text-white border-b border-white/60 px-4 py-2 w-fit hover:text-gold hover:border-gold transition-colors">
+          VIEW DETAILS
+        </a>
+      </div>
+    </div>
+
+  </section>
+  <!-- ================= END ROOM GALLERY =================== -->
+
+  <!-- ================== TESTIMONIALS =================== -->
+  <section id="testimonials" class="testimonial-bg relative min-h-[600px] sm:min-h-[680px] w-full overflow-hidden flex items-center">
+
+    <!-- Large decorative quote mark (placeholder detail, echoes a real photo's negative space) -->
+    <span class="hidden lg:block absolute right-[18%] top-1/2 -translate-y-1/2 font-serif text-[220px] leading-none text-white/10 select-none pointer-events-none">
+      &rdquo;
+    </span>
+
+    <div class="relative z-[3] max-w-[1600px] mx-auto w-full px-6 sm:px-10 py-20">
+      <div class="max-w-xl">
+
+        <p class="font-nav text-xs tracking-[0.4em] text-white/60 mb-4">TESTIMONIALS</p>
+
+        <h2 class="font-display text-3xl sm:text-[46px] font-normal text-white leading-[1.25em]">
+          What Client's Say?
+        </h2>
+        <span class="block h-px w-16 bg-gold/70 mt-6 mb-8"></span>
+
+        <!-- Slides -->
+        <div id="testimonial-slides" class="relative">
+
+          <div class="testimonial-slide is-active" data-testimonial="0">
+            <p class="font-body text-[15px] sm:text-base font-normal text-white/85 leading-[1.75em] mb-8">
+              Excellent stay! Rooms were very clean and modern. The location is perfect—just a few minutes
+              away from the Vaijnath temple. The staff was polite and helpful throughout. The 24-hour room
+              service and hot water were a big plus for us. Definitely coming back!"
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="avatar-placeholder">
+                <svg class="w-6 h-6 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="8" r="3.5"/>
+                  <path stroke-linecap="round" d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-gold text-sm tracking-widest mb-1">★★★★★</div>
+                <p class="font-nav text-sm tracking-[0.15em] text-white">RAMESH PATEL</p>
+                <p class="font-nav text-xs text-white/55">Ahmedabad</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide" data-testimonial="1">
+            <p class="font-body text-[15px] sm:text-base font-normal text-white/85 leading-[1.75em] mb-8">
+              A truly peaceful stay right next to the temple. The rooms were spotless, the staff went out
+              of their way to help us plan our darshan timings, and breakfast was a lovely touch. Highly
+              recommend for families."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="avatar-placeholder">
+                <svg class="w-6 h-6 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="8" r="3.5"/>
+                  <path stroke-linecap="round" d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-gold text-sm tracking-widest mb-1">★★★★★</div>
+                <p class="font-nav text-sm tracking-[0.15em] text-white">PRIYA DESHMUKH</p>
+                <p class="font-nav text-xs text-white/55">Pune</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide" data-testimonial="2">
+            <p class="font-body text-[15px] sm:text-base font-normal text-white/85 leading-[1.75em] mb-8">
+              Great value for money. Comfortable beds, strong Wi-Fi, and the power backup meant we never
+              had an issue even during the evening outage. Would happily stay here again on our next visit."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="avatar-placeholder">
+                <svg class="w-6 h-6 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="8" r="3.5"/>
+                  <path stroke-linecap="round" d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-gold text-sm tracking-widest mb-1">★★★★★</div>
+                <p class="font-nav text-sm tracking-[0.15em] text-white">ANIL KULKARNI</p>
+                <p class="font-nav text-xs text-white/55">Nashik</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide" data-testimonial="3">
+            <p class="font-body text-[15px] sm:text-base font-normal text-white/85 leading-[1.75em] mb-8">
+              Warm hospitality from the moment we checked in. The location made it so easy to walk to the
+              temple, and the room was clean and quiet. Exactly what we needed after a long journey."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="avatar-placeholder">
+                <svg class="w-6 h-6 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="8" r="3.5"/>
+                  <path stroke-linecap="round" d="M4.5 20c1.4-3.6 4.4-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-gold text-sm tracking-widest mb-1">★★★★★</div>
+                <p class="font-nav text-sm tracking-[0.15em] text-white">SUNITA JOSHI</p>
+                <p class="font-nav text-xs text-white/55">Mumbai</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dots -->
+        <div id="testimonial-dots" class="flex items-center gap-3 mt-10">
+          <span class="testimonial-dot is-active" data-testimonial-dot="0"></span>
+          <span class="testimonial-dot" data-testimonial-dot="1"></span>
+          <span class="testimonial-dot" data-testimonial-dot="2"></span>
+          <span class="testimonial-dot" data-testimonial-dot="3"></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ================ END TESTIMONIALS =================== -->
+
+  <!-- =============== FOOTER + CONTACT =================== -->
+  <footer id="contact" class="bg-[#151412] border-t border-white/10">
+    <div class="max-w-[1600px] mx-auto px-6 sm:px-10 py-20 grid gap-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
+
+      <!-- Brand -->
+      <div>
+        <a href="#home" class="inline-block select-none">
+          <span class="block font-serif text-2xl tracking-wide text-gold leading-none">
+            HOTEL YASHDEEP
+          </span>
+          <span class="mt-2 flex items-center gap-3">
+            <span class="h-px w-6 bg-gold/70"></span>
+            <span class="font-nav text-[11px] tracking-[0.4em] text-gold/90">PARLI VAIJNATH</span>
+            <span class="h-px w-6 bg-gold/70"></span>
+          </span>
+        </a>
+        <p class="mt-6 font-body text-[15px] text-white/55 leading-[1.75em] max-w-xs">
+          Welcome to Hotel Yashdeep — where comfort meets tradition in the spiritual heart of Parli Vaijnath.
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h3 class="font-display text-2xl font-normal text-white mb-6">Explore</h3>
+        <nav class="flex flex-col gap-3 font-body text-[15px] text-white/60">
+          <a href="#home" class="hover:text-gold transition-colors w-fit">Home</a>
+          <a href="#about" class="hover:text-gold transition-colors w-fit">About Us</a>
+          <a href="#rooms" class="hover:text-gold transition-colors w-fit">Rooms &amp; Suites</a>
+          <a href="#facilities" class="hover:text-gold transition-colors w-fit">Facilities</a>
+          <a href="#gallery" class="hover:text-gold transition-colors w-fit">Gallery</a>
+          <a href="#contact" class="hover:text-gold transition-colors w-fit">Contact</a>
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="font-display text-2xl font-normal text-white mb-6">Contact</h3>
+
+        <p class="font-body text-[15px] text-white/60 leading-[1.75em] mb-6">
+          Near Vaijnath Jyotirlinga Temple<br>
+          Parli Vaijnath, Beed (Maharashtra)
+        </p>
+
+        <div class="flex flex-col gap-3 mb-6">
+          <a href="tel:+919999900000" class="flex items-center gap-3 text-white hover:text-gold transition-colors">
+            <svg class="w-5 h-5 text-gold shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4.5c0-.5.4-1 1-1h2.7c.5 0 .9.3 1 .8l.8 3.2c.1.4-.1.9-.4 1.1L8 9.7c1 2.3 2.9 4.2 5.2 5.2l1.1-1.1c.3-.3.7-.4 1.1-.4l3.2.8c.5.1.8.5.8 1V17.5c0 .6-.4 1-1 1H17C9.8 18.5 4.5 13.2 4.5 6V4.5"/>
+            </svg>
+            <span class="font-display text-lg sm:text-xl font-normal">Reservation - 99999 00000</span>
+          </a>
+          <a href="tel:+919999911111" class="flex items-center gap-3 text-white hover:text-gold transition-colors">
+            <svg class="w-5 h-5 text-gold shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4.5c0-.5.4-1 1-1h2.7c.5 0 .9.3 1 .8l.8 3.2c.1.4-.1.9-.4 1.1L8 9.7c1 2.3 2.9 4.2 5.2 5.2l1.1-1.1c.3-.3.7-.4 1.1-.4l3.2.8c.5.1.8.5.8 1V17.5c0 .6-.4 1-1 1H17C9.8 18.5 4.5 13.2 4.5 6V4.5"/>
+            </svg>
+            <span class="font-display text-lg sm:text-xl font-normal">Reception - 99999 11111</span>
+          </a>
+        </div>
+
+        <a href="mailto:info@hotelyashdeep.com" class="inline-block font-body text-[15px] text-white/80 border-b border-white/30 pb-1 hover:text-gold hover:border-gold transition-colors mb-7">
+          info@hotelyashdeep.com
+        </a>
+
+        <div class="flex items-center gap-4">
+          <a href="#" aria-label="Facebook" class="text-white/70 hover:text-gold transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2C16.5 3.1 15.4 3 14.2 3c-2.5 0-4.2 1.5-4.2 4.3v2.5H7.3v3.2H10V21h3.5Z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="text-white/70 hover:text-gold transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r="0.9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" class="text-white/70 hover:text-gold transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10.5 9.7v4.6l4-2.3-4-2.3Z" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="relative border-t border-white/10">
+      <div class="max-w-[1600px] mx-auto px-6 sm:px-10 py-7 text-center">
+        <p class="font-nav text-xs tracking-widest text-white/40">
+          © Copyright <span id="copyright-year">2026</span> by <span class="text-white/70">Hotel Yashdeep</span>
+        </p>
+      </div>
+      <a href="#home" aria-label="Back to top"
+        class="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-gold/50 flex items-center justify-center text-gold hover:bg-gold hover:text-[#151412] transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/>
+        </svg>
+      </a>
+    </div>
   </footer>
+  <!-- =========== END FOOTER + CONTACT =================== -->
 
   <script>
     const menuBtn = document.getElementById('menu-btn');
@@ -674,6 +1122,40 @@
       videoIframe.src = ''; // stop playback
       document.body.classList.remove('overflow-hidden');
     }
+
+    // Testimonials slider
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
+    let testimonialIndex = 0;
+    let testimonialTimer;
+
+    function showTestimonialSlide(index) {
+      testimonialSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      testimonialDots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      testimonialIndex = index;
+    }
+
+    function nextTestimonialSlide() {
+      showTestimonialSlide((testimonialIndex + 1) % testimonialSlides.length);
+    }
+
+    function startTestimonialTimer() {
+      clearInterval(testimonialTimer);
+      testimonialTimer = setInterval(nextTestimonialSlide, 6000);
+    }
+
+    testimonialDots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        showTestimonialSlide(i);
+        startTestimonialTimer();
+      });
+    });
+
+    startTestimonialTimer();
+
+    // Footer copyright year
+    const copyrightYear = document.getElementById('copyright-year');
+    if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
     videoOpenBtn.addEventListener('click', openVideoModal);
     videoCloseBtn.addEventListener('click', closeVideoModal);
