@@ -423,6 +423,52 @@
     </div>
   </section>
   <!-- =============== END ROOMS & SUITES =============== -->
+
+  <!-- =================== VIDEO TOUR ==================== -->
+  <section class="video-cta-bg relative h-[420px] sm:h-[480px] flex items-center justify-center text-center px-6 overflow-hidden">
+    <div>
+      <div class="text-gold text-lg tracking-widest mb-3">★★★★★</div>
+
+      <p class="font-condensed text-[15px] font-normal text-white/80 uppercase tracking-[6px] mb-2">
+        Hotel Yashdeep Parli Vaijnath
+      </p>
+
+      <h2 class="font-display text-3xl sm:text-[46px] font-normal text-white leading-[1.25em] mb-8">
+        Rooms, Interiors, Amenities &amp; More!
+      </h2>
+
+      <button id="video-open-btn" aria-label="Play hotel tour video"
+        class="play-btn inline-flex items-center justify-center h-16 w-16 rounded-full bg-white/95">
+        <svg class="w-6 h-6 text-gold ml-1" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+  <!-- ================= END VIDEO TOUR =================== -->
+
+  <!-- =================== VIDEO MODAL ==================== -->
+  <div id="video-modal" class="hidden fixed inset-0 z-[100] bg-black/85 items-center justify-center px-4">
+    <button id="video-close-btn" aria-label="Close video"
+      class="absolute top-5 right-5 sm:top-8 sm:right-8 text-white/80 hover:text-white transition-colors">
+      <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+
+    <div class="w-full max-w-4xl aspect-video">
+      <iframe id="video-iframe"
+        class="w-full h-full"
+        src=""
+        data-src="https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1&rel=0"
+        title="Hotel Yashdeep — Video Tour"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <!-- ================= END VIDEO MODAL =================== -->
     <section id="contact" class="min-h-[40vh] flex items-center justify-center text-white/40 font-nav text-sm tracking-widest">
       CONTACT SECTION — COMING NEXT
     </section>
@@ -500,6 +546,35 @@
     });
 
     startRoomTimer();
+
+    // Video tour modal
+    const videoModal = document.getElementById('video-modal');
+    const videoOpenBtn = document.getElementById('video-open-btn');
+    const videoCloseBtn = document.getElementById('video-close-btn');
+    const videoIframe = document.getElementById('video-iframe');
+
+    function openVideoModal() {
+      videoIframe.src = videoIframe.dataset.src;
+      videoModal.classList.remove('hidden');
+      videoModal.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.add('hidden');
+      videoModal.classList.remove('flex');
+      videoIframe.src = ''; // stop playback
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    videoOpenBtn.addEventListener('click', openVideoModal);
+    videoCloseBtn.addEventListener('click', closeVideoModal);
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
   </script>
 
 </body>
