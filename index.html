@@ -1304,12 +1304,54 @@
         </ul>
       </div>
 
-      <!-- Map -->
-      <div class="relative w-full min-h-[420px] lg:min-h-[560px] lg:h-full rounded-md overflow-hidden shadow-xl">
-        <iframe
-          src="https://www.google.com/maps?q=18.8427722,76.5353944(Vaijnath+Jyotirlinga+Temple)&z=15&output=embed"
-          class="absolute inset-0 w-full h-full border-0" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade" title="Hotel Yashdeep location map"></iframe>
+      <!-- Send a Message + Map -->
+      <div>
+        <h3 class="font-display text-2xl font-normal text-[#222] mb-8">Send Us a Message</h3>
+
+        <form id="contact-form" class="mb-16">
+          <div class="grid sm:grid-cols-2 gap-x-8 gap-y-7 mb-7">
+            <div>
+              <label for="cf-name" class="font-body text-[15px] text-[#666] block mb-2">Your Name *</label>
+              <input id="cf-name" name="name" type="text" required
+                class="w-full font-body text-[15px] text-[#222] bg-transparent border-b border-black/20 pb-2 focus:outline-none focus:border-gold transition-colors">
+            </div>
+            <div>
+              <label for="cf-city" class="font-body text-[15px] text-[#666] block mb-2">Your City *</label>
+              <input id="cf-city" name="city" type="text" required
+                class="w-full font-body text-[15px] text-[#222] bg-transparent border-b border-black/20 pb-2 focus:outline-none focus:border-gold transition-colors">
+            </div>
+            <div>
+              <label for="cf-mobile" class="font-body text-[15px] text-[#666] block mb-2">Your Mobile Number
+                *</label>
+              <input id="cf-mobile" name="mobile" type="tel" required
+                class="w-full font-body text-[15px] text-[#222] bg-transparent border-b border-black/20 pb-2 focus:outline-none focus:border-gold transition-colors">
+            </div>
+            <div>
+              <label for="cf-email" class="font-body text-[15px] text-[#666] block mb-2">Your Email</label>
+              <input id="cf-email" name="email" type="email"
+                class="w-full font-body text-[15px] text-[#222] bg-transparent border-b border-black/20 pb-2 focus:outline-none focus:border-gold transition-colors">
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label for="cf-message" class="font-body text-[15px] text-[#666] block mb-2">Message</label>
+            <textarea id="cf-message" name="message" rows="3"
+              class="w-full font-body text-[15px] text-[#222] bg-transparent border-b border-black/20 pb-2 resize-y focus:outline-none focus:border-gold transition-colors"></textarea>
+          </div>
+
+          <button type="submit"
+            class="bg-gold text-white font-nav text-xs tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#8c6a3f] transition-colors">
+            Send Message
+          </button>
+        </form>
+
+        <!-- Map -->
+        <div class="relative w-full min-h-[420px] rounded-md overflow-hidden shadow-xl">
+          <iframe
+            src="https://www.google.com/maps?q=18.8427722,76.5353944(Vaijnath+Jyotirlinga+Temple)&z=15&output=embed"
+            class="absolute inset-0 w-full h-full border-0" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Hotel Yashdeep location map"></iframe>
+        </div>
       </div>
 
     </div>
@@ -1540,6 +1582,33 @@
     // Footer copyright year
     const copyrightYear = document.getElementById('copyright-year');
     if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
+
+    // Contact form — no backend on this static site, so hand off to the
+    // visitor's own email client with the details pre-filled.
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = contactForm.name.value.trim();
+        const city = contactForm.city.value.trim();
+        const mobile = contactForm.mobile.value.trim();
+        const email = contactForm.email.value.trim();
+        const message = contactForm.message.value.trim();
+
+        const subject = `Website enquiry from ${name}`;
+        const bodyLines = [
+          `Name: ${name}`,
+          `City: ${city}`,
+          `Mobile: ${mobile}`,
+          email ? `Email: ${email}` : null,
+          '',
+          message || '(no message)',
+        ].filter((line) => line !== null);
+
+        const mailto = `mailto:info@hotelyashdeep.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        window.location.href = mailto;
+      });
+    }
 
     videoOpenBtn.addEventListener('click', openVideoModal);
     videoCloseBtn.addEventListener('click', closeVideoModal);
