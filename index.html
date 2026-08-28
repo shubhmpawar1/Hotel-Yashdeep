@@ -1308,7 +1308,13 @@
       <div>
         <h3 class="font-display text-2xl font-normal text-[#222] mb-8">Send Us a Message</h3>
 
-        <form id="contact-form" class="mb-16">
+        <form id="contact-form" class="mb-16"
+          action="https://formsubmit.co/shubham.ravindra.pawar@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New website enquiry — Hotel Yashdeep">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
           <div class="grid sm:grid-cols-2 gap-x-8 gap-y-7 mb-7">
             <div>
               <label for="cf-name" class="font-body text-[15px] text-[#666] block mb-2">Your Name *</label>
@@ -1340,9 +1346,11 @@
           </div>
 
           <button type="submit"
-            class="bg-gold text-white font-nav text-xs tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#8c6a3f] transition-colors">
+            class="bg-gold text-white font-nav text-xs tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#8c6a3f] transition-colors disabled:opacity-60">
             Send Message
           </button>
+
+          <p id="contact-form-status" class="hidden mt-4 font-body text-[15px]"></p>
         </form>
 
         <!-- Map -->
@@ -1583,30 +1591,39 @@
     const copyrightYear = document.getElementById('copyright-year');
     if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
-    // Contact form — no backend on this static site, so hand off to the
-    // visitor's own email client with the details pre-filled.
+    // Contact form — submits to FormSubmit (formsubmit.co) via AJAX so the
+    // visitor never leaves the page. The form's action/method attributes are
+    // kept as a plain-POST fallback for when JavaScript is unavailable.
     const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
+    const contactFormStatus = document.getElementById('contact-form-status');
+    if (contactForm && contactFormStatus) {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name = contactForm.name.value.trim();
-        const city = contactForm.city.value.trim();
-        const mobile = contactForm.mobile.value.trim();
-        const email = contactForm.email.value.trim();
-        const message = contactForm.message.value.trim();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        contactFormStatus.classList.add('hidden');
 
-        const subject = `Website enquiry from ${name}`;
-        const bodyLines = [
-          `Name: ${name}`,
-          `City: ${city}`,
-          `Mobile: ${mobile}`,
-          email ? `Email: ${email}` : null,
-          '',
-          message || '(no message)',
-        ].filter((line) => line !== null);
+        try {
+          const ajaxAction = contactForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+          const response = await fetch(ajaxAction, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(contactForm),
+          });
+          if (!response.ok) throw new Error('Request failed');
 
-        const mailto = `mailto:info@hotelyashdeep.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-        window.location.href = mailto;
+          contactFormStatus.textContent = "Thank you — your message has been sent. We'll get back to you shortly.";
+          contactFormStatus.className = 'mt-4 font-body text-[15px] text-green-700';
+          contactForm.reset();
+        } catch (err) {
+          contactFormStatus.textContent = 'Something went wrong sending your message. Please call or email us directly.';
+          contactFormStatus.className = 'mt-4 font-body text-[15px] text-red-600';
+        } finally {
+          contactFormStatus.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
       });
     }
 
